@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nancy Pérez De Gabriel | Ingeniera Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ============================================
+⚠️ PERSONALIZA ESTAS VARIABLES DE COLOR
+============================================ */
+:root {
+--primary-purple: #9b5de5;      /* Color principal */
+--secondary-purple: #c084fc;    /* Color secundario */
+--dark-purple: #5b21b6;         /* Texto oscuro */
+--light-purple: #ede9fe;        /* Fondo claro */
+--white: #ffffff;
+--gray-light: #f8f7fd;
+--gray-text: #4a5568;
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+}
+body {
+font-family: 'Poppins', sans-serif;
+background-color: var(--white);
+color: var(--gray-text);
+line-height: 1.7;
+overflow-x: hidden;
+}
+/* Scrollbar personalizado animado */
+::-webkit-scrollbar {
+width: 12px;
+}
+::-webkit-scrollbar-track {
+background: linear-gradient(to bottom, var(--light-purple), var(--white));
+}
+::-webkit-scrollbar-thumb {
+background: linear-gradient(to bottom, var(--primary-purple), var(--secondary-purple));
+border-radius: 6px;
+}
+::selection {
+background: var(--primary-purple);
+color: var(--white);
+}
+h1, h2, h3, h4 {
+color: var(--dark-purple);
+font-weight: 600;
+}
+/* ====================
+SCROLL PROGRESS BAR
+==================== */
+.scroll-progress {
+position: fixed;
+top: 0;
+left: 0;
+width: 0%;
+height: 4px;
+background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+z-index: 9999;
+transition: width 0.1s ease;
+}
+/* ====================
+NAVBAR ANIMADO
+==================== */
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 1rem 5%;
+z-index: 1000;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+background: transparent;
+}
+.navbar.scrolled {
+background: rgba(255, 255, 255, 0.98);
+backdrop-filter: blur(20px);
+box-shadow: 0 10px 40px rgba(155, 93, 229, 0.15);
+padding: 0.8rem 5%;
+}
+.nav-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 100%;
+}
+.logo {
+font-size: 1.8rem;
+font-weight: 700;
+color: var(--dark-purple);
+text-decoration: none;
+letter-spacing: 2px;
+transition: transform 0.3s ease;
+position: relative;
+}
+.logo:hover {
+transform: scale(1.05);
+}
+.logo span {
+color: var(--primary-purple);
+animation: pulseLogo 2s infinite;
+}
+@keyframes pulseLogo {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+.nav-menu {
+display: flex;
+list-style: none;
+gap: 2rem;
+}
+.nav-link {
+color: var(--gray-text);
+text-decoration: none;
+font-weight: 500;
+font-size: 0.95rem;
+position: relative;
+padding: 0.5rem 0;
+transition: all 0.3s ease;
+}
+.nav-link::before {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 3px;
+background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+border-radius: 2px;
+transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover {
+color: var(--primary-purple);
+}
+.nav-link:hover::before {
+width: 100%;
+}
+.nav-link.active {
+color: var(--primary-purple);
+}
+.nav-link.active::before {
+width: 100%;
+}
+.mobile-toggle {
+display: none;
+flex-direction: column;
+cursor: pointer;
+gap: 5px;
+z-index: 1001;
+}
+.mobile-toggle span {
+width: 25px;
+height: 3px;
+background: var(--dark-purple);
+transition: all 0.3s ease;
+border-radius: 2px;
+}
+.mobile-toggle.active span:nth-child(1) {
+transform: rotate(45deg) translate(5px, 5px);
+}
+.mobile-toggle.active span:nth-child(2) {
+opacity: 0;
+}
+.mobile-toggle.active span:nth-child(3) {
+transform: rotate(-45deg) translate(5px, -5px);
+}
+/* ====================
+HERO SECTION
+==================== */
+.hero {
+min-height: 100vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: radial-gradient(circle at 20% 50%, var(--light-purple) 0%, #f5f3ff 50%, var(--white) 100%);
+position: relative;
+overflow: hidden;
+}
+.hero-bg-shapes {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+overflow: hidden;
+z-index: 0;
+}
+.shape {
+position: absolute;
+border-radius: 50%;
+opacity: 0.1;
+filter: blur(60px);
+}
+.shape-1 {
+width: 500px;
+height: 500px;
+background: var(--primary-purple);
+top: -150px;
+right: -150px;
+animation: floatShape1 20s ease-in-out infinite;
+}
+.shape-2 {
+width: 400px;
+height: 400px;
+background: var(--secondary-purple);
+bottom: -100px;
+left: -150px;
+animation: floatShape2 25s ease-in-out infinite;
+}
+.shape-3 {
+width: 300px;
+height: 300px;
+background: var(--dark-purple);
+top: 50%;
+right: 10%;
+animation: floatShape3 18s ease-in-out infinite;
+}
+@keyframes floatShape1 {
+0%, 100% { transform: translate(0, 0) scale(1); }
+33% { transform: translate(-50px, 30px) scale(1.1); }
+66% { transform: translate(30px, -50px) scale(0.9); }
+}
+@keyframes floatShape2 {
+0%, 100% { transform: translate(0, 0) rotate(0deg); }
+33% { transform: translate(40px, 40px) rotate(120deg); }
+66% { transform: translate(-40px, 20px) rotate(240deg); }
+}
+@keyframes floatShape3 {
+0%, 100% { transform: translate(0, 0) scale(1); }
+50% { transform: translate(60px, -60px) scale(1.2); }
+}
+.hero-grid {
+position: absolute;
+width: 100%;
+height: 100%;
+background-image:
+linear-gradient(var(--light-purple) 1px, transparent 1px),
+linear-gradient(90deg, var(--light-purple) 1px, transparent 1px);
+background-size: 50px 50px;
+opacity: 0.3;
+z-index: 0;
+}
+.hero-content {
+position: relative;
+z-index: 1;
+text-align: center;
+padding: 2rem 5%;
+}
+.avatar-container {
+position: relative;
+display: inline-block;
+margin-bottom: 2.5rem;
+}
+.avatar-ring {
+position: absolute;
+inset: -15px;
+border: 3px dashed var(--primary-purple);
+border-radius: 50%;
+animation: ringRotate 20s linear infinite;
+}
+@keyframes ringRotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.avatar {
+width: 220px;
+height: 220px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 5rem;
+color: var(--white);
+font-weight: 600;
+box-shadow: 0 30px 80px rgba(155, 93, 229, 0.4);
+animation: avatarBounce 3s ease-in-out infinite;
+}
+@keyframes avatarBounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-15px); }
+}
+.hero-title-wrapper {
+margin-bottom: 1.5rem;
+}
+.hero-title {
+font-size: 3.5rem;
+margin-bottom: 0.5rem;
+color: var(--dark-purple);
+line-height: 1.2;
+overflow: hidden;
+}
+.typing-text {
+color: var(--primary-purple);
+font-size: 1.6rem;
+margin-bottom: 1.5rem;
+min-height: 2.5rem;
+}
+.typing-cursor {
+animation: blinkCursor 0.7s step-end infinite;
+}
+@keyframes blinkCursor {
+0%, 100% { opacity: 1; }
+50% { opacity: 0; }
+}
+.hero-description {
+max-width: 700px;
+margin: 0 auto 2.5rem;
+font-size: 1.15rem;
+color: var(--gray-text);
+}
+.cta-buttons {
+display: flex;
+gap: 1.5rem;
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 3rem;
+}
+.btn {
+padding: 1rem 2.5rem;
+border-radius: 50px;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+cursor: pointer;
+border: none;
+font-family: inherit;
+font-size: 1rem;
+display: inline-flex;
+align-items: center;
+gap: 0.7rem;
+position: relative;
+overflow: hidden;
+}
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition: left 0.5s ease;
+}
+.btn:hover::before {
+left: 100%;
+}
+.btn-primary {
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+color: var(--white);
+box-shadow: 0 10px 40px rgba(155, 93, 229, 0.4);
+}
+.btn-primary:hover {
+transform: translateY(-5px);
+box-shadow: 0 20px 50px rgba(155, 93, 229, 0.5);
+}
+.btn-outline {
+background: transparent;
+color: var(--primary-purple);
+border: 2px solid var(--primary-purple);
+}
+.btn-outline:hover {
+background: var(--primary-purple);
+color: var(--white);
+transform: translateY(-5px);
+}
+.scroll-indicator {
+position: absolute;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+animation: bounceScroll 2s ease-in-out infinite;
+cursor: pointer;
+}
+@keyframes bounceScroll {
+0%, 100% { transform: translateX(-50%) translateY(0); }
+50% { transform: translateX(-50%) translateY(10px); }
+}
+.scroll-text {
+font-size: 0.85rem;
+color: var(--primary-purple);
+margin-top: 10px;
+display: block;
+}
+/* ====================
+SECCIONES GENERALES
+==================== */
+.section {
+width: 100%;
+padding: 8rem 5%;
+position: relative;
+}
+.section-header {
+text-align: center;
+margin-bottom: 4rem;
+}
+.section-tag {
+color: var(--primary-purple);
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 4px;
+font-size: 0.85rem;
+margin-bottom: 1rem;
+display: inline-block;
+padding: 0.5rem 1.5rem;
+background: var(--light-purple);
+border-radius: 50px;
+}
+.section-title {
+font-size: 2.8rem;
+color: var(--dark-purple);
+position: relative;
+display: inline-block;
+}
+.section-title::after {
+content: '';
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 4px;
+background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+border-radius: 2px;
+}
+.reveal-section {
+opacity: 0;
+transform: translateY(50px);
+transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal-section.active {
+opacity: 1;
+transform: translateY(0);
+}
+/* ====================
+SOBRE MÍ
+==================== */
+.about-content {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 4rem;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+}
+.about-image-container {
+position: relative;
+}
+.about-img-placeholder {
+width: 100%;
+aspect-ratio: 1/1;
+background: linear-gradient(135deg, var(--light-purple), var(--white));
+border-radius: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 6rem;
+color: var(--primary-purple);
+box-shadow: 0 30px 80px rgba(155, 93, 229, 0.2);
+position: relative;
+overflow: hidden;
+}
+.about-img-placeholder::before {
+content: attr(data-initials);
+}
+.floating-card {
+position: absolute;
+background: var(--white);
+padding: 1.5rem 2rem;
+border-radius: 20px;
+box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+animation: floatCard 4s ease-in-out infinite;
+}
+.card-1 {
+bottom: 10%;
+right: -30px;
+}
+.card-2 {
+top: 10%;
+left: -30px;
+animation-delay: 2s;
+}
+@keyframes floatCard {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-15px); }
+}
+.stats-number {
+font-size: 2.5rem;
+font-weight: 700;
+color: var(--primary-purple);
+display: block;
+}
+.stats-label {
+font-size: 0.9rem;
+color: var(--gray-text);
+}
+.about-text h3 {
+font-size: 2rem;
+margin-bottom: 1.5rem;
+color: var(--dark-purple);
+}
+.about-text p {
+margin-bottom: 1.5rem;
+color: var(--gray-text);
+text-align: justify;
+}
+.personal-info {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1.5rem;
+margin-top: 2.5rem;
+}
+.info-box {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1rem;
+background: var(--light-purple);
+border-radius: 15px;
+transition: all 0.3s ease;
+}
+.info-box:hover {
+transform: translateX(10px);
+background: var(--primary-purple);
+}
+.info-box:hover .info-icon,
+.info-box:hover .info-label,
+.info-box:hover .info-value {
+color: var(--white);
+}
+.info-icon {
+width: 45px;
+height: 45px;
+background: var(--white);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--primary-purple);
+font-size: 1.2rem;
+flex-shrink: 0;
+transition: all 0.3s ease;
+}
+.info-label {
+font-size: 0.8rem;
+color: var(--gray-text);
+display: block;
+}
+.info-value {
+font-weight: 600;
+color: var(--dark-purple);
+}
+/* ====================
+TIMELINE EXPERIENCIA MEJORADA ✨⭐
+==================== */
+.timeline-section {
+background: linear-gradient(135deg, var(--gray-light) 0%, var(--light-purple) 100%);
+position: relative;
+padding: 6rem 5% 8rem 5%;
+}
+.timeline-container {
+max-width: 1100px;
+margin: 0 auto;
+position: relative;
+}
+.timeline-line {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+width: 6px;
+height: calc(100% - 80px);
+background: linear-gradient(to bottom, var(--primary-purple), var(--secondary-purple));
+border-radius: 3px;
+box-shadow: 0 0 30px rgba(155, 93, 229, 0.4);
+}
+.timeline-line::before {
+content: '';
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 20px;
+height: 20px;
+background: var(--white);
+border: 4px solid var(--primary-purple);
+border-radius: 50%;
+box-shadow: 0 0 0 10px var(--light-purple);
+}
+.timeline-item {
+position: relative;
+width: 50%;
+padding: 0;
+margin-bottom: 4rem;
+perspective: 1000px;
+}
+.timeline-item.left {
+left: 0;
+text-align: right;
+}
+.timeline-item.right {
+left: 50%;
+text-align: left;
+}
+.timeline-dot {
+position: absolute;
+width: 32px;
+height: 32px;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+border: 5px solid var(--white);
+border-radius: 50%;
+top: 45px;
+z-index: 5;
+box-shadow: 0 0 0 12px var(--light-purple), 0 0 30px rgba(155, 93, 229, 0.5);
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.timeline-item.left .timeline-dot {
+right: -16px;
+}
+.timeline-item.right .timeline-dot {
+left: -16px;
+}
+.timeline-item:hover .timeline-dot {
+transform: scale(1.4);
+box-shadow: 0 0 0 15px var(--light-purple), 0 0 40px rgba(155, 93, 229, 0.7);
+}
+.timeline-card {
+background: var(--white);
+padding: 2.5rem;
+border-radius: 25px;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+border: 2px solid transparent;
+position: relative;
+overflow: hidden;
+transform-origin: top center;
+}
+.timeline-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 6px;
+background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+transform: scaleX(0);
+transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.timeline-card::after {
+content: '';
+position: absolute;
+bottom: 0;
+right: 0;
+width: 200px;
+height: 200px;
+background: radial-gradient(circle, var(--light-purple) 0%, transparent 70%);
+opacity: 0.5;
+}
+.timeline-item:hover .timeline-card::before {
+transform: scaleX(1);
+}
+.timeline-item:hover .timeline-card {
+transform: translateY(-15px) scale(1.03);
+box-shadow: 0 35px 90px rgba(155, 93, 229, 0.3);
+border-color: var(--light-purple);
+z-index: 10;
+}
+.timeline-badge-group {
+display: flex;
+flex-wrap: wrap;
+gap: 0.8rem;
+margin-bottom: 1.5rem;
+}
+.timeline-date-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+color: var(--white);
+padding: 0.7rem 1.6rem;
+border-radius: 30px;
+font-size: 0.85rem;
+font-weight: 600;
+box-shadow: 0 5px 20px rgba(155, 93, 229, 0.4);
+position: relative;
+overflow: hidden;
+}
+.timeline-date-badge::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition: left 0.6s ease;
+}
+.timeline-item:hover .timeline-date-badge::before {
+left: 100%;
+}
+.timeline-title {
+font-size: 1.5rem;
+color: var(--dark-purple);
+margin-bottom: 0.8rem;
+line-height: 1.3;
+font-weight: 700;
+}
+.timeline-company-link {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+color: var(--primary-purple);
+font-weight: 700;
+margin-bottom: 1.2rem;
+font-size: 1.1rem;
+text-decoration: none;
+transition: all 0.3s ease;
+}
+.timeline-company-link:hover {
+color: var(--secondary-purple);
+transform: translateX(5px);
+}
+.timeline-company-link i {
+font-size: 1.2rem;
+}
+.timeline-desc {
+color: var(--gray-text);
+font-size: 0.95rem;
+line-height: 1.9;
+margin-bottom: 1.5rem;
+}
+.timeline-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.8rem;
+}
+.timeline-tag {
+background: linear-gradient(135deg, var(--light-purple), #f0ebfa);
+color: var(--dark-purple);
+padding: 0.6rem 1.2rem;
+border-radius: 25px;
+font-size: 0.8rem;
+font-weight: 600;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+border: 1px solid rgba(155, 93, 229, 0.2);
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+.timeline-tag:hover {
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+color: var(--white);
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 8px 25px rgba(155, 93, 229, 0.4);
+border-color: var(--primary-purple);
+}
+.timeline-tag i {
+font-size: 0.75rem;
+}
+/* ====================
+HABILIDADES
+==================== */
+.skills-content {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+gap: 4rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.skill-category h4 {
+font-size: 1.4rem;
+margin-bottom: 2.5rem;
+color: var(--dark-purple);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.skill-category h4 i {
+color: var(--primary-purple);
+font-size: 1.6rem;
+}
+.skill-item {
+margin-bottom: 2rem;
+}
+.skill-header {
+display: flex;
+justify-content: space-between;
+margin-bottom: 0.8rem;
+}
+.skill-name {
+font-weight: 600;
+color: var(--gray-text);
+font-size: 1rem;
+}
+.skill-percentage {
+color: var(--primary-purple);
+font-weight: 700;
+font-size: 1rem;
+}
+.skill-bar-bg {
+width: 100%;
+height: 14px;
+background: var(--light-purple);
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+}
+.skill-bar-fill {
+height: 100%;
+background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+border-radius: 10px;
+width: 0;
+position: relative;
+transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skill-bar-fill::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+animation: shimmerBar 2s infinite;
+}
+@keyframes shimmerBar {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+.tags-container {
+display: flex;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.skill-tag {
+background: var(--white);
+color: var(--dark-purple);
+padding: 0.9rem 1.8rem;
+border-radius: 50px;
+font-size: 0.95rem;
+font-weight: 500;
+border: 2px solid var(--light-purple);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+cursor: default;
+position: relative;
+overflow: hidden;
+}
+.skill-tag::before {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.skill-tag:hover {
+color: var(--white);
+border-color: var(--primary-purple);
+transform: translateY(-5px) scale(1.05);
+box-shadow: 0 10px 30px rgba(155, 93, 229, 0.3);
+}
+.skill-tag:hover::before {
+opacity: 1;
+}
+.skill-tag:hover span {
+position: relative;
+z-index: 1;
+}
+/* ====================
+CERTIFICACIONES
+==================== */
+.certificates-section {
+background: linear-gradient(135deg, var(--dark-purple), var(--primary-purple));
+color: var(--white);
+}
+.certificates-section .section-tag {
+background: rgba(255, 255, 255, 0.1);
+color: var(--secondary-purple);
+}
+.certificates-section .section-title {
+color: var(--white);
+}
+.certificates-section .section-title::after {
+background: var(--secondary-purple);
+}
+.certificates-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.certificate-card {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+padding: 2rem;
+border-radius: 20px;
+border: 1px solid rgba(255, 255, 255, 0.2);
+text-align: center;
+transition: all 0.4s ease;
+}
+.certificate-card:hover {
+background: rgba(255, 255, 255, 0.2);
+transform: translateY(-10px);
+}
+.certificate-icon {
+font-size: 3rem;
+color: var(--secondary-purple);
+margin-bottom: 1rem;
+}
+.certificate-title {
+font-size: 1.1rem;
+margin-bottom: 0.5rem;
+color: var(--white);
+}
+.certificate-year {
+font-size: 0.9rem;
+color: rgba(255, 255, 255, 0.7);
+}
+/* ====================
+CONTACTO SIMPLIFICADO
+==================== */
+.contact-content {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 4rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.contact-info {
+padding-right: 2rem;
+}
+.contact-intro {
+margin-bottom: 2.5rem;
+}
+.contact-intro h3 {
+font-size: 1.8rem;
+margin-bottom: 1rem;
+color: var(--dark-purple);
+}
+.contact-intro p {
+color: var(--gray-text);
+}
+.contact-method {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+margin-bottom: 2rem;
+padding: 1.5rem;
+background: var(--white);
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+transition: all 0.3s ease;
+}
+.contact-method:hover {
+transform: translateX(10px);
+box-shadow: 0 15px 40px rgba(155, 93, 229, 0.15);
+}
+.contact-icon-box {
+width: 60px;
+height: 60px;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+border-radius: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+color: var(--white);
+flex-shrink: 0;
+}
+.contact-detail h4 {
+font-size: 1rem;
+color: var(--dark-purple);
+margin-bottom: 0.3rem;
+}
+.contact-detail p {
+color: var(--gray-text);
+font-size: 0.95rem;
+}
+.social-links-container {
+margin-top: 2.5rem;
+}
+.social-links-container h4 {
+font-size: 1.1rem;
+color: var(--dark-purple);
+margin-bottom: 1.5rem;
+}
+.social-icons {
+display: flex;
+gap: 1rem;
+}
+.social-btn {
+width: 50px;
+height: 50px;
+background: var(--white);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--primary-purple);
+font-size: 1.3rem;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+.social-btn:hover {
+background: var(--primary-purple);
+color: var(--white);
+transform: translateY(-5px) rotate(10deg);
+box-shadow: 0 10px 30px rgba(155, 93, 229, 0.4);
+}
+/* ====================
+FOOTER
+==================== */
+footer {
+background: var(--dark-purple);
+color: var(--white);
+padding: 4rem 5% 2rem;
+}
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+}
+.footer-main {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 3rem;
+margin-bottom: 3rem;
+}
+.footer-brand h3 {
+color: var(--white);
+font-size: 1.5rem;
+margin-bottom: 1.5rem;
+}
+.footer-brand p {
+color: rgba(255, 255, 255, 0.7);
+font-size: 0.95rem;
+line-height: 1.8;
+}
+.footer-links h4,
+.footer-contact h4 {
+color: var(--white);
+font-size: 1.1rem;
+margin-bottom: 1.5rem;
+}
+.footer-links ul {
+list-style: none;
+}
+.footer-links li {
+margin-bottom: 0.8rem;
+}
+.footer-links a {
+color: rgba(255, 255, 255, 0.7);
+text-decoration: none;
+transition: all 0.3s ease;
+}
+.footer-links a:hover {
+color: var(--secondary-purple);
+padding-left: 5px;
+}
+.footer-bottom {
+text-align: center;
+padding-top: 2rem;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+color: rgba(255, 255, 255, 0.5);
+font-size: 0.9rem;
+}
+/* ====================
+BOTÓN Volver Arriba
+==================== */
+.back-to-top {
+position: fixed;
+bottom: 30px;
+right: 30px;
+width: 55px;
+height: 55px;
+background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+color: var(--white);
+border: none;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.3rem;
+opacity: 0;
+visibility: hidden;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+z-index: 999;
+box-shadow: 0 10px 40px rgba(155, 93, 229, 0.5);
+}
+.back-to-top.visible {
+opacity: 1;
+visibility: visible;
+}
+.back-to-top:hover {
+transform: translateY(-5px) scale(1.1);
+box-shadow: 0 15px 50px rgba(155, 93, 229, 0.6);
+}
+/* ====================
+RESPONSIVE
+==================== */
+@media (max-width: 992px) {
+.hero-title { font-size: 2.8rem; }
+.timeline-line { left: 30px; }
+.timeline-item { width: 100%; left: 0 !important; padding-left: 90px; text-align: left !important; }
+.timeline-dot { left: 16px !important; }
+.avatar { width: 180px; height: 180px; font-size: 4rem; }
+.timeline-card { padding: 2rem; }
+.timeline-item.right { text-align: left; }
+}
+@media (max-width: 768px) {
+.mobile-toggle { display: flex; }
+.nav-menu {
+position: fixed;
+top: 75px;
+left: -100%;
+width: 100%;
+height: calc(100vh - 75px);
+background: var(--white);
+flex-direction: column;
+padding: 3rem;
+gap: 1.5rem;
+transition: left 0.4s ease;
+box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+.nav-menu.active { left: 0; }
+.hero-title { font-size: 2.2rem; }
+.typing-text { font-size: 1.3rem; }
+.avatar { width: 150px; height: 150px; font-size: 3.5rem; }
+.section { padding: 5rem 5%; }
+.section-title { font-size: 2rem; }
+.skills-content { grid-template-columns: 1fr; }
+.about-content { grid-template-columns: 1fr; text-align: center; }
+.floating-card { display: none; }
+.info-box { flex-direction: column; text-align: center; }
+.contact-content { grid-template-columns: 1fr; }
+.contact-info { padding-right: 0; }
+}
+@media (max-width: 480px) {
+.cta-buttons { flex-direction: column; align-items: center; }
+.btn { width: 100%; justify-content: center; }
+.hero-title { font-size: 1.8rem; }
+.timeline-card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<!-- Barra de progreso del scroll -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- Botón volver arriba -->
+<button class="back-to-top" id="backToTop" onclick="volverAlInicio()">
+<i class="fas fa-arrow-up"></i>
+</button>
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+<div class="nav-container">
+<a href="#" class="logo">Nancy<span>.PDG</span></a>
+<ul class="nav-menu" id="navMenu">
+<li><a href="#inicio" class="nav-link active">Inicio</a></li>
+<li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+<li><a href="#experiencia" class="nav-link">Experiencia</a></li>
+<li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+<li><a href="#certificaciones" class="nav-link">Certificaciones</a></li>
+<li><a href="#contacto" class="nav-link">Contacto</a></li>
+</ul>
+<div class="mobile-toggle" id="mobileToggle" onclick="toggleMenu()">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section id="inicio" class="hero">
+<div class="hero-grid"></div>
+<div class="hero-bg-shapes">
+<div class="shape shape-1" data-speed="0.5"></div>
+<div class="shape shape-2" data-speed="0.3"></div>
+<div class="shape shape-3" data-speed="0.7"></div>
+</div>
+<div class="hero-content">
+<div class="avatar-container">
+<div class="avatar-ring"></div>
+<div class="avatar">PDG</div>
+</div>
+<div class="hero-title-wrapper">
+<h1 class="hero-title">Nancy Pérez De Gabriel</h1>
+</div>
+<p class="typing-text" id="typingText"></p>
+<p class="hero-description">
+Transformo procesos en eficiencia. Me enfoco en optimizar recursos y aplicar metodologías y herramientas de mejora continua para impulsar resultados.
+</p>
+<div class="cta-buttons">
+<!-- Enlace directo al PDF que descarga sin alerta -->
+<a href="cv.pdf" download class="btn btn-primary" id="downloadBtn">
+<i class="fas fa-download"></i> Descargar CV
+</a>
+<a href="#contacto" class="btn btn-outline">
+<i class="fas fa-envelope"></i> Contáctame
+</a>
+</div>
+</div>
+<div class="scroll-indicator" onclick="irASeccion('sobre-mi')">
+<i class="fas fa-chevron-down" style="color: var(--primary-purple); font-size: 1.5rem;"></i>
+<span class="scroll-text">Desliza para ver más</span>
+</div>
+</section>
+<!-- Sobre Mí -->
+<section id="sobre-mi" class="section reveal-section">
+<div class="section-header">
+<span class="section-tag">Perfil Profesional</span>
+<h2 class="section-title">Sobre Mí</h2>
+</div>
+<div class="about-content">
+<div class="about-image-container">
+<div class="about-img-placeholder" data-initials="PDG"></div>
+<div class="floating-card card-1">
+<span class="stats-number" data-target="3">0</span>
+<span class="stats-label">habilidades clave</span>
+</div>
+<div class="floating-card card-2">
+<span class="stats-number" data-target="3">0</span>
+<span class="stats-label">Proyectos universitarios</span>
+</div>
+</div>
+<div class="about-text">
+<h3>Ingeniera Industrial enfocada optimización de procesos, mejora continua</h3>
+<p>Estudiante de Ingeniería Industrial con enfoque en la optimización y mejora de procesos. Interesada en la aplicación de herramientas de calidad, diagramas de análisis y metodologías de mejora continua para identificar oportunidades de eficiencia y solución de problemas en entornos productivos. Cuento con formación en Core Tools y busco desarrollar proyectos que contribuyan al fortalecimiento de la calidad, productividad y desempeño operativo en las organizaciones.</p>
+<div class="personal-info">
+<div class="info-box">
+<div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+<div>
+<span class="info-label">Fecha de nacimiento</span>
+<span class="info-value">29 Abril, 2006</span>
+</div>
+</div>
+<div class="info-box">
+<div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+<div>
+<span class="info-label">Ubicación actual</span>
+<span class="info-value">Ciudad de Tlaxcala</span>
+</div>
+</div>
+<div class="info-box">
+<div class="info-icon"><i class="fas fa-envelope"></i></div>
+<div>
+<span class="info-label">Correo electrónico</span>
+<span class="info-value">nancygabriel744@gmail.com</span>
+</div>
+</div>
+<div class="info-box">
+<div class="info-icon"><i class="fas fa-phone"></i></div>
+<div>
+<span class="info-label">Teléfono</span>
+<span class="info-value">+52 246 493 9301</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Experiencia Timeline MEJORADA CON NUEVO DISEÑO ⭐💜 -->
+<section id="experiencia" class="section timeline-section reveal-section">
+<div class="section-header">
+<span class="section-tag">Trayectoria</span>
+<h2 class="section-title">Educación Universitaria</h2>
+</div>
+<div class="timeline-container">
+<div class="timeline-line"></div>
+<!-- Item 1 -->
+<div class="timeline-item left">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-badge-group">
+<span class="timeline-date-badge">
+<i class="far fa-clock"></i> 2025 - Actual
+</span>
+</div>
+<h3 class="timeline-title">Análisis del proceso de fermentación de microorganismos y factores de contaminación</h3>
+<a href="https://www.bayer.com/en/" target="_blank" class="timeline-company-link">
+<i class="fas fa-building"></i> Bayer De Mexico Planta Tlaxcala
+</a>
+<p class="timeline-desc">Analicé problemas de contaminación en el proceso de fermentación, identificando causas raíz y puntos críticos para proponer acciones de mejora y desarrollar soluciones enfocadas en la reducción de la contaminación mediante la metodología 8D's.</p>
+<div class="timeline-tags">
+<span class="timeline-tag">
+<i class="fas fa-bullseye"></i> Metodología 8D
+</span>
+<span class="timeline-tag">
+<i class="fas fa-chart-line"></i> Análisis de Causa Raíz
+</span>
+<span class="timeline-tag">
+<i class="fas fa-flask"></i> Fermentación
+</span>
+<span class="timeline-tag">
+<i class="fas fa-tasks"></i> Mejora Continua
+</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="timeline-item right">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-badge-group">
+<span class="timeline-date-badge">
+<i class="far fa-clock"></i> 2025 - 2025
+</span>
+</div>
+<h3 class="timeline-title">Análisis del proceso de elaboración del periódico</h3>
+<a href="https://oem.com.mx/elsoldetlaxcala/" target="_blank" class="timeline-company-link">
+<i class="fas fa-newspaper"></i> El Sol de Tlaxcala
+</a>
+<p class="timeline-desc">Elaboré diagramas de operaciones, bloques, hombre-máquina, recorrido y bimanual para analizar el proceso productivo, identificando oportunidades de mejora en tiempos, flujo de trabajo y uso de recursos.</p>
+<div class="timeline-tags">
+<span class="timeline-tag">
+<i class="fas fa-project-diagram"></i> Diagramas de Proceso
+</span>
+<span class="timeline-tag">
+<i class="fas fa-tachometer-alt"></i> Optimización de Tiempos
+</span>
+<span class="timeline-tag">
+<i class="fas fa-cogs"></i> Mejora Continua
+</span>
+<span class="timeline-tag">
+<i class="fas fa-flow-chart"></i> Análisis Operativo
+</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="timeline-item left">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-badge-group">
+<span class="timeline-date-badge">
+<i class="far fa-clock"></i> 2024 - 2025
+</span>
+</div>
+<h3 class="timeline-title">Almacén</h3>
+<a href="https://laluztextiles.com.mx/" target="_blank" class="timeline-company-link">
+<i class="fas fa-warehouse"></i> La Luz TEXTILES
+</a>
+<p class="timeline-desc">Apoyé en el área de maquila supervisando el conteo de producción de cobijas, gestionando solicitudes de compra para almacén y registrando entradas y salidas de productos y apliqué la metodología 5S en el área de mecánico de hilatura.</p>
+<div class="timeline-tags">
+<span class="timeline-tag">
+<i class="fas fa-boxes"></i> Gestión de Almacén
+</span>
+<span class="timeline-tag">
+<i class="fas fa-sort-amount-down"></i> Control de Inventario
+</span>
+<span class="timeline-tag">
+<i class="fas fa-broom"></i> Metodología 5S
+</span>
+<span class="timeline-tag">
+<i class="fas fa-file-contract"></i> Documentación
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Habilidades -->
+<section id="habilidades" class="section reveal-section">
+<div class="section-header">
+<span class="section-tag">Competencias</span>
+<h2 class="section-title">Mis Habilidades</h2>
+</div>
+<div class="skills-content">
+<div class="skill-category">
+<h4><i class="fas fa-chart-line"></i> Habilidades Técnicas</h4>
+<div class="skill-item">
+<div class="skill-header">
+<span class="skill-name">Paquete Office</span>
+<span class="skill-percentage" data-percent="80">0%</span>
+</div>
+<div class="skill-bar-bg">
+<div class="skill-bar-fill" data-width="80%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-header">
+<span class="skill-name">Minitab</span>
+<span class="skill-percentage" data-percent="70">0%</span>
+</div>
+<div class="skill-bar-bg">
+<div class="skill-bar-fill" data-width="70%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-header">
+<span class="skill-name">AutoCad</span>
+<span class="skill-percentage" data-percent="80">0%</span>
+</div>
+<div class="skill-bar-bg">
+<div class="skill-bar-fill" data-width="80%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-header">
+<span class="skill-name">Catia</span>
+<span class="skill-percentage" data-percent="80">0%</span>
+</div>
+<div class="skill-bar-bg">
+<div class="skill-bar-fill" data-width="80%"></div>
+</div>
+</div>
+</div>
+<div class="skill-category">
+<h4><i class="fas fa-users"></i> Habilidades Blandas</h4>
+<div class="tags-container">
+<div class="skill-tag"><span>Liderazgo de Equipos</span></div>
+<div class="skill-tag"><span>Comunicación Efectiva</span></div>
+<div class="skill-tag"><span>Resolución de Problemas</span></div>
+<div class="skill-tag"><span>Pensamiento Analítico</span></div>
+<div class="skill-tag"><span>Creatividad</span></div>
+<div class="skill-tag"><span>Adaptabilidad</span></div>
+<div class="skill-tag"><span>Planeación Estratégica</span></div>
+<div class="skill-tag"><span>Innovación</span></div>
+<div class="skill-tag"><span>Toma de Decisiones</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Certificaciones -->
+<section id="certificaciones" class="section certificates-section reveal-section">
+<div class="section-header">
+<span class="section-tag">Credenciales</span>
+<h2 class="section-title">Certificaciones</h2>
+</div>
+<div class="certificates-grid">
+<div class="certificate-card">
+<div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+<h3 class="certificate-title">Core Tools</h3>
+<span class="certificate-year">2026</span>
+</div>
+<div class="certificate-card">
+<div class="certificate-icon"><i class="fas fa-award"></i></div>
+<h3 class="certificate-title">Análisis de Datos (Excel)</h3>
+<span class="certificate-year">2025</span>
+</div>
+<div class="certificate-card">
+<div class="certificate-icon"><i class="fas fa-medal"></i></div>
+<h3 class="certificate-title">Ingles (IQ English)</h3>
+<span class="certificate-year">2024</span>
+</div>
+</div>
+</section>
+<!-- Contacto -->
+<section id="contacto" class="section reveal-section">
+<div class="section-header">
+<span class="section-tag">Conectemos</span>
+<h2 class="section-title">Contáctame</h2>
+</div>
+<div class="contact-content">
+<div class="contact-info">
+<div class="contact-intro">
+<h3>Disponible para nuevas oportunidades</h3>
+</div>
+<div class="contact-method">
+<div class="contact-icon-box"><i class="fas fa-envelope"></i></div>
+<div class="contact-detail">
+<h4>Email</h4>
+<p>nancygabriel744@gmail.com</p>
+</div>
+</div>
+<div class="contact-method">
+<div class="contact-icon-box"><i class="fas fa-phone"></i></div>
+<div class="contact-detail">
+<h4>Teléfono</h4>
+<p>+52 246 493 9301</p>
+</div>
+</div>
+<div class="contact-method">
+<div class="contact-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+<div class="contact-detail">
+<h4>Ubicación</h4>
+<p>Ciudad de Tlaxcala, México</p>
+</div>
+</div>
+<div class="social-links-container">
+<h4>Sígueme en redes:</h4>
+<div class="social-icons">
+<a href="#" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+<a href="mailto:nancygabriel744@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer>
+<div class="footer-content">
+<div class="footer-main">
+<div class="footer-brand">
+<h3>Nancy Pérez De Gabriel</h3>
+<p>Ingeniera Industrial especializada en optimización de procesos utilizando metodologías para la mejora continua.</p>
+</div>
+<div class="footer-links">
+<h4>Enlaces Rápidos</h4>
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#sobre-mi">Sobre Mí</a></li>
+<li><a href="#experiencia">Experiencia</a></li>
+<li><!-- Agrega enlace si lo deseas --></a></li>
+<li><a href="#habilidades">Habilidades</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 Nancy Pérez De Gabriel. Todos los derechos reservados. Diseñado con 💜</p>
+</div>
+</div>
+</footer>
+<script>
+// ==============================
+// CONFIGURACIÓN DE TIPOS
+// ==============================
+const textosEfecto = [
+"Ingeniera Industrial",
+"Conocimiento en Optimización",
+"Conocimiento Core Tools"
+];
+let indiceTexto = 0;
+let indiceCaracter = 0;
+let esBorrando = false;
+let velocidadTeclado = 100;
+function efectoMaquinaDeEscribir() {
+const elemento = document.getElementById('typingText');
+const textoActual = textosEfecto[indiceTexto];
+if (esBorrando) {
+elemento.innerHTML = textoActual.substring(0, indiceCaracter - 1) + '<span class="typing-cursor">|</span>';
+indiceCaracter--;
+velocidadTeclado = 50;
+} else {
+elemento.innerHTML = textoActual.substring(0, indiceCaracter + 1) + '<span class="typing-cursor">|</span>';
+indiceCaracter++;
+velocidadTeclado = 100;
+}
+if (!esBorrando && indiceCaracter === textoActual.length) {
+velocidadTeclado = 2500;
+esBorrando = true;
+} else if (esBorrando && indiceCaracter === 0) {
+esBorrando = false;
+indiceTexto = (indiceTexto + 1) % textosEfecto.length;
+velocidadTeclado = 500;
+}
+setTimeout(efectoMaquinaDeEscribir, velocidadTeclado);
+}
+setTimeout(efectoMaquinaDeEscribir, 1000);
+// ==============================
+// NAVBAR SCROLL EFFECT
+// ==============================
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 100) {
+navbar.classList.add('scrolled');
+} else {
+navbar.classList.remove('scrolled');
+}
+});
+// ==============================
+// MENU MÓVIL
+// ==============================
+function toggleMenu() {
+const navMenu = document.getElementById('navMenu');
+const mobileToggle = document.getElementById('mobileToggle');
+navMenu.classList.toggle('active');
+mobileToggle.classList.toggle('active');
+}
+document.querySelectorAll('.nav-link').forEach(link => {
+link.addEventListener('click', () => {
+const navMenu = document.getElementById('navMenu');
+const mobileToggle = document.getElementById('mobileToggle');
+navMenu.classList.remove('active');
+mobileToggle.classList.remove('active');
+});
+});
+// ==============================
+// SCROLL PROGRESS BAR
+// ==============================
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+const scrolled = (scrollTop / scrollHeight) * 100;
+scrollProgress.style.width = scrolled + '%';
+});
+// ==============================
+// SCROLL REVEAL ANIMATION
+// ==============================
+const revealSections = document.querySelectorAll('.reveal-section');
+function revelarSecciones() {
+revealSections.forEach(seccion => {
+const topSeccion = seccion.getBoundingClientRect().top;
+const alturaVentana = window.innerHeight;
+if (topSeccion < alturaVentana - 150) {
+seccion.classList.add('active');
+if (seccion.id === 'habilidades') {
+animarBarrasHabilidades();
+}
+if (seccion.id === 'sobre-mi') {
+animarContadores();
+}
+}
+});
+}
+window.addEventListener('scroll', revelarSecciones);
+revelarSecciones();
+// ==============================
+// ANIMACIÓN CONTADORES
+// ==============================
+function animarContadores() {
+const contadores = document.querySelectorAll('.stats-number[data-target]');
+contadores.forEach(contador => {
+const objetivo = parseInt(contador.getAttribute('data-target'));
+const incremento = Math.ceil(objetivo / 60);
+let actual = 0;
+const actualizarContador = () => {
+actual += incremento;
+if (actual < objetivo) {
+contador.textContent = actual + '+';
+requestAnimationFrame(actualizarContador);
+} else {
+contador.textContent = objetivo + '+';
+}
+};
+actualizarContador();
+});
+}
+// ==============================
+// ANIMACIÓN BARRAS DE HABILIDADES
+// ==============================
+let habilidadesAnimadas = false;
+function animarBarrasHabilidades() {
+if (habilidadesAnimadas) return;
+const barras = document.querySelectorAll('.skill-bar-fill');
+const porcentajes = document.querySelectorAll('.skill-percentage');
+barras.forEach(barra => {
+const ancho = barra.getAttribute('data-width');
+barra.style.width = ancho;
+});
+porcentajes.forEach(porciento => {
+const meta = parseInt(porciento.getAttribute('data-percent'));
+let valorActual = 0;
+const intervalo = setInterval(() => {
+valorActual++;
+porciento.textContent = valorActual + '%';
+if (valorActual >= meta) {
+clearInterval(intervalo);
+}
+}, 15);
+});
+habilidadesAnimadas = true;
+}
+// ==============================
+// ACTUALIZAR LINK ACTIVO DEL MENU
+// ==============================
+const secciones = document.querySelectorAll('section[id]');
+const linksNav = document.querySelectorAll('.nav-link');
+function actualizarLinkActivo() {
+let posicionScroll = window.scrollY + 200;
+secciones.forEach(seccion => {
+const alturaSeccion = seccion.offsetHeight;
+const offsetTop = seccion.offsetTop;
+const id = seccion.getAttribute('id');
+if (posicionScroll >= offsetTop && posicionScroll < offsetTop + alturaSeccion) {
+linksNav.forEach(link => {
+link.classList.remove('active');
+if (link.getAttribute('href') === '#' + id) {
+link.classList.add('active');
+}
+});
+}
+});
+}
+window.addEventListener('scroll', actualizarLinkActivo);
+// ==============================
+// PARALLAX EFECTO MOUSE MOVE
+// ==============================
+document.addEventListener('mousemove', (e) => {
+const shapes = document.querySelectorAll('.shape');
+const x = e.clientX / window.innerWidth;
+const y = e.clientY / window.innerHeight;
+shapes.forEach((shape, index) => {
+const speed = parseFloat(shape.getAttribute('data-speed')) || 0.5;
+const movimientoX = (x - 0.5) * 50 * speed;
+const movimientoY = (y - 0.5) * 50 * speed;
+shape.style.transform = `translate(${movimientoX}px, ${movimientoY}px)`;
+});
+});
+// ==============================
+// BOTÓN VOLVER ARRIBA
+// ==============================
+const backToTopBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 500) {
+backToTopBtn.classList.add('visible');
+} else {
+backToTopBtn.classList.remove('visible');
+}
+});
+function volverAlInicio() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+}
+function irASeccion(idSeccion) {
+const seccion = document.getElementById(idSeccion);
+if (seccion) {
+const offsetPosition = seccion.offsetTop - 100;
+window.scrollTo({
+top: offsetPosition,
+behavior: 'smooth'
+});
+}
+}
+// ==============================
+// CONFETTI CELEBRATION AL DESCARGAR CV 🎉
+// ==============================
+function lanzarConfeti() {
+const colores = ['#9b5de5', '#c084fc', '#ffffff', '#f0abfc', '#d7b4ff'];
+for (let i = 0; i < 150; i++) {
+const confeti = document.createElement('div');
+confeti.style.position = 'fixed';
+confeti.style.width = '12px';
+confeti.style.height = '12px';
+confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+confeti.style.left = Math.random() * 100 + 'vw';
+confeti.style.top = '-15px';
+confeti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+confeti.style.zIndex = '9999';
+confeti.style.opacity = '1';
+confeti.style.boxShadow = '0 0 10px rgba(155, 93, 229, 0.5)';
+document.body.appendChild(confeti);
+const caida = () => {
+let pos = 0;
+let rotacion = 0;
+const intervalo = setInterval(() => {
+pos += 4;
+rotacion += 15;
+confeti.style.top = pos + 'px';
+confeti.style.transform = `rotate(${rotacion}deg) scale(${1 + Math.sin(pos * 0.1) * 0.2})`;
+if (pos > window.innerHeight) {
+clearInterval(intervalo);
+setTimeout(() => confeti.remove(), 500);
+}
+}, 18);
+};
+setTimeout(caida, i * 15);
+}
+}
+// Escuchar clic en botón de descarga
+document.getElementById('downloadBtn').addEventListener('click', function(e) {
+lanzarConfeti();
+});
+// ==============================
+// EFECTO TILT EN TARJETAS TIMELINE
+// ==============================
+document.querySelectorAll('.timeline-card').forEach(tarjeta => {
+tarjeta.addEventListener('mousemove', (e) => {
+const rect = tarjeta.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+const centerX = rect.width / 2;
+const centerY = rect.height / 2;
+const rotateX = (y - centerY) / 25;
+const rotateY = (centerX - x) / 25;
+tarjeta.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.03)`;
+});
+tarjeta.addEventListener('mouseleave', () => {
+tarjeta.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+});
+});
+// ==============================
+// PRELOAD ANIMATION
+// ==============================
+window.addEventListener('load', () => {
+document.body.style.opacity = '1';
+});
+document.body.style.opacity = '0';
+document.body.style.transition = 'opacity 0.5s ease';
+console.log('%c━━━━━━━━━━━━━━━━━━━━━━', 'color: #9b5de5');
+console.log('%c  Página Web de Nancy Pérez De Gabriel', 'color: #9b5de5; font-size: 16px; font-weight: bold;');
+console.log('%c  Ingeniera Industrial', 'color: #c084fc; font-size: 12px;');
+console.log('%c  © 2024 - Todos los derechos reservados', 'color: #9b5de5; font-size: 10px;');
+console.log('%c━━━━━━━━━━━━━━━━━━━━━━', 'color: #9b5de5');
+</script>
+</body>
+</html>
